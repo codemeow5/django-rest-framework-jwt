@@ -20,8 +20,8 @@ def jwt_payload_handler(user):
 
     payload = {
         'user_id': user.pk,
-        'email': user.email,
-        'username': username,
+        #'email': user.email,
+        #'username': username,
         'exp': datetime.utcnow() + api_settings.JWT_EXPIRATION_DELTA
     }
     if isinstance(user.pk, uuid.UUID):
