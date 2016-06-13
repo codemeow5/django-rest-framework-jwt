@@ -86,8 +86,7 @@ class VerificationBaseSerializer(Serializer):
         try:
             payload = jwt_decode_handler(token)
         except jwt.ExpiredSignature:
-            msg = _('Signature has expired.')
-            raise serializers.ValidationError(msg)
+            raise serializers.SignatureHasExpired()
         except jwt.DecodeError:
             msg = _('Error decoding signature.')
             raise serializers.ValidationError(msg)

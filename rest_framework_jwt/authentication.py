@@ -8,6 +8,7 @@ from rest_framework.authentication import (
     BaseAuthentication, get_authorization_header
 )
 
+from rest_framework import status
 from rest_framework_jwt.settings import api_settings
 
 
@@ -32,8 +33,7 @@ class BaseJSONWebTokenAuthentication(BaseAuthentication):
         try:
             payload = jwt_decode_handler(jwt_value)
         except jwt.ExpiredSignature:
-            msg = _('Signature has expired.')
-            raise exceptions.AuthenticationFailed(msg)
+            raise exceptions.SignatureHasExpired()
         except jwt.DecodeError:
             msg = _('Error decoding signature.')
             raise exceptions.AuthenticationFailed(msg)
